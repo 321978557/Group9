@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ClassDiagram/ClassDiagram.iml" filepath="$PROJECT_DIR$/ClassDiagram/ClassDiagram.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Group-9.iml" filepath="$PROJECT_DIR$/.idea/Group-9.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>
