@@ -20,7 +20,7 @@ public class Road
   public boolean equals(Object obj){
 
   }
-  
+
   public void setBudgetRange(){//diagrame????????
 
   }
