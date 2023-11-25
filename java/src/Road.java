@@ -20,13 +20,14 @@ public class Road
   public boolean equals(Object obj){
 
   }
+  
   public void setBudgetRange(){//diagrame????????
 
   }
   public void setTimeRange(int timeRange){//timelineRange?
     this.timeRange = timeRange;
   }
-  
+
   public void setDefault(int timeRange,int otherConstructions,String challenges){//diagrame中这里是int
     this.timeRange = timeRange;
     this.otherConstructions = otherConstructions;
