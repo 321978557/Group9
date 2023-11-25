@@ -20,6 +20,9 @@ public class Residential
   public void setBudgetRange(int budgetRange){
     this.budgetRange = budgetRange;
   }
+  public void setConstructionType(){
+    this.constructionType = constructionType;
+  }
   public int getBathrooms(){
     return bathroomsNo;
   }
@@ -35,4 +38,5 @@ public class Residential
   public boolean equals(Object obj){
 
   }
+
 }
