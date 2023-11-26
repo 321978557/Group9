@@ -11,7 +11,6 @@ public class Resources
                 this.totalExpenses=totalExpenses;
         }
         public double countUsed()//这东西我觉得不要用到
-
         {
 
         }
