@@ -35,13 +35,6 @@ public class Road extends Project
 
   }
 
-  public void setBudgetRange(){//diagrame????????
-
-  }
-  public void setTimeRange(int timeRange){//timelineRange?
-
-  }
-
   public void setDefault(int timeRange,int otherConstructions,String challenges){//diagrame中这里是int
     this.otherConstructions = otherConstructions;
     this.challenges = challenges;
