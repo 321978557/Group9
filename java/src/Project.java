@@ -11,7 +11,6 @@ public class Project {
     }
     public String getName(){
         return name;
-
     }
     public int getBudget(){
         return budget;
