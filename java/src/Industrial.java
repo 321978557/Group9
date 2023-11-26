@@ -1,21 +1,20 @@
-public class Industrial
+public class Industrial extends Project
 {
-  private int budgetRange;
-  private int timelineRange;
+
   private String constructionType;
-  public Industrial(String constructionType){
+  public Industrial(String name,int budget,int timeline,int size,String constructionType){
+    super(name,budget,timeline,size);
     this.constructionType = constructionType;
   }
-  public void setBudgetRange(int budgetRange){
-    this.budgetRange = budgetRange;
-  }
-  public void setTimelineRange(int timelineRange){
-    this.timelineRange = timelineRange;
-  }
-  public boolean equals(Object obj){
 
+  public boolean equals(Object obj){
+    if(obj==null||getClass()!=obj.getClass())
+    {return false;
+    }
+    Industrial other=(Industrial)obj;
+    return constructionType==other.constructionType;
   }
   public String getType(){//这里直接就type?
-
+     return constructionType;
   }
 }

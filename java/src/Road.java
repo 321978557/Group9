@@ -1,14 +1,18 @@
-public class Road
+public class Road extends Project
 {
   private int floors;
   private String usage;
-  private int budgetRange;
-  private int timeRange;
   private String challenges;
   private int otherConstructions;
   private int length;
   private int width;
-  public Road(int floors,String use){
+  public Road(String name,int budget,int timeline,int size,int floors,String usage,int otherConstructions,int length,int width){
+    super(name,budget,timeline,size);
+    this.floors=floors;
+    this.usage=usage;
+    this.otherConstructions=otherConstructions;
+    this.length=length;
+    this.width=width;
 
   }
   public int getFloors(){
@@ -18,6 +22,16 @@ public class Road
     return usage;
   }
   public boolean equals(Object obj){
+    if(obj==null|| getClass()!=obj.getClass()){
+      return false;
+    }
+    Road other=(Road)obj;
+    return floors==other.floors&&
+           usage==other.usage&&
+           challenges==other.challenges&&
+           otherConstructions==other.otherConstructions&&
+            length==other.length&&
+            width==other.width;
 
   }
 
@@ -25,11 +39,10 @@ public class Road
 
   }
   public void setTimeRange(int timeRange){//timelineRange?
-    this.timeRange = timeRange;
+
   }
 
   public void setDefault(int timeRange,int otherConstructions,String challenges){//diagrame中这里是int
-    this.timeRange = timeRange;
     this.otherConstructions = otherConstructions;
     this.challenges = challenges;
   }
