@@ -17,7 +17,7 @@ public class Commercial extends Project
   public String getUsage(){
     
     return usage;
-
+// this is chris
   }
   public boolean equals(Object obj){
     if(obj==null||getClass()!=obj.getClass()){
