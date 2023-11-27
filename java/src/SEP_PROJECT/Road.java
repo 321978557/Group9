@@ -1,3 +1,5 @@
+package SEP_PROJECT;
+
 public class Road extends Project
 {
   private int floors;

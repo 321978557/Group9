@@ -1,3 +1,5 @@
+package SEP_PROJECT;
+
 public class Industrial extends Project
 {
 
