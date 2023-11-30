@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-    <component name="ProjectModuleManager">
-        <modules>
-            <module fileurl="file://$PROJECT_DIR$/ClassDiagram/ClassDiagram.iml" filepath="$PROJECT_DIR$/ClassDiagram/ClassDiagram.iml" />
-            <module fileurl="file://$PROJECT_DIR$/.idea/Group-9.iml" filepath="$PROJECT_DIR$/.idea/Group-9.iml" />
-            <!-- 如果有其他冲突的模块，请在这里添加 -->
-            <module fileurl="file://$PROJECT_DIR$/java/java.iml" filepath="$PROJECT_DIR$/java/java.iml" />
-            <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
-        </modules>
-    </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ClassDiagram/ClassDiagram.iml" filepath="$PROJECT_DIR$/ClassDiagram/ClassDiagram.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Group-9.iml" filepath="$PROJECT_DIR$/.idea/Group-9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mathhandin3/Mathhandin3.iml" filepath="$PROJECT_DIR$/Mathhandin3/Mathhandin3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/java.iml" filepath="$PROJECT_DIR$/java/java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+    </modules>
+  </component>
 </project>
