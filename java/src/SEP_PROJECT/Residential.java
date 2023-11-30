@@ -3,7 +3,6 @@ package SEP_PROJECT;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Residential extends Project
 {
   private int bathRoomsNo = 1;
