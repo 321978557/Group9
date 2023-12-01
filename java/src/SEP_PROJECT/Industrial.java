@@ -4,8 +4,8 @@ public class Industrial extends Project
 {
 
   private String constructionType;
-  public Industrial(String name,int budget,int timeline,int size,String constructionType){
-    super(name,budget,timeline,size);
+  public Industrial(String name,double budgetRangeMin,double budgetRangeMax,int timeline,int size,String constructionType){
+    super(name,budgetRangeMin,budgetRangeMax,timeline,size);
     this.constructionType = constructionType;
   }
 
@@ -16,7 +16,7 @@ public class Industrial extends Project
     Industrial other=(Industrial)obj;
     return constructionType==other.constructionType;
   }
-  public String getType(){//这里直接就type?
+  public String getProjectType(){//这里直接就type?
      return constructionType;
   }
 }

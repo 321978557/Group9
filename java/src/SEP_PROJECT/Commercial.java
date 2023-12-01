@@ -6,16 +6,16 @@ public class Commercial extends Project
   private int floorsNo;
   private String intendedUse;
 
-  public Commercial(int timeLine, int size, int floorsNo, String intendedUse)
+  public Commercial(String name,int timeLine, int size, int floorsNo, String intendedUse)
   {
-    super(500000, 2000000, timeLine, size);
+    super(name,500000, 2000000, timeLine, size);
     this.floorsNo = floorsNo;
     this.intendedUse = intendedUse;
   }
 
   public Commercial(int size, String intendedUse)
   {
-    super(500000, 2000000, 18, size);
+    super(name, 2000000, 18, size);
     this.intendedUse = intendedUse;
   }
 
