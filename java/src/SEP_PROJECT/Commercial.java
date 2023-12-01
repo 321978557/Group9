@@ -1,47 +1,30 @@
-package SEP_PROJECT;
-//this is Corina s commentgdfgs
-
 public class Commercial extends Project
 {
   private int floorsNo;
-  private String intendedUse;
-
-  public Commercial(String name,int timeLine, int size, int floorsNo, String intendedUse)
-  {
-    super(name,500000, 2000000, timeLine, size);
+  private String usage;
+  public Commercial(String name,int budget,int timeline,int size,int floorsNo,String usage){
+    super(name,budget,timeline,size);
+    this.usage=usage;
     this.floorsNo = floorsNo;
-    this.intendedUse = intendedUse;
+    //use?
   }
-
-  public Commercial(int size, String intendedUse)
-  {
-    super(name, 2000000, 18, size);
-    this.intendedUse = intendedUse;
+  public void setDefault(int floorsNo,int timelineRange,int budgetRange){
+    this.floorsNo = floorsNo;
   }
-
-  public int getFloorsNo()
-  {
+  public int getFloorsNo(){
     return floorsNo;
   }
+  public String getUsage(){
 
-  public void setFloorsNo(int floorsNo)
-  {
-    this.floorsNo = floorsNo;
+    return usage;
+
   }
+  public boolean equals(Object obj){
+    if(obj==null||getClass()!=obj.getClass()){
+      return false;
+    }
+    Commercial other=(Commercial)obj;
+    return usage==other.usage;
 
-  public String getIntendedUse()
-  {
-    return intendedUse;
-  }
-
-  public void setIntendedUse(String intendedUse)
-  {
-    this.intendedUse = intendedUse;
-  }
-
-  @Override
-  public String getProjectType()
-  {
-    return "Commercial";
   }
 }
