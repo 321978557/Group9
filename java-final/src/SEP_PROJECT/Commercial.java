@@ -10,6 +10,7 @@ public class Commercial extends Project
     this.floorsNo = floorsNo;
     this.usage = usage;
   }
+
   public void setDefault(int floorsNo,int timelineRange,int budgetRange){
     this.floorsNo = floorsNo;
   }
