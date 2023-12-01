@@ -1,12 +1,14 @@
+package SEP_PROJECT;
+
 public class Commercial extends Project
 {
   private int floorsNo;
   private String usage;
   public Commercial(String name,int budget,int timeline,int size,int floorsNo,String usage){
-    super(name,budget,timeline,size);
+    super(name,500000, 2000000, timeline, size);
     this.usage=usage;
     this.floorsNo = floorsNo;
-    //use?
+    this.usage = usage;
   }
   public void setDefault(int floorsNo,int timelineRange,int budgetRange){
     this.floorsNo = floorsNo;
@@ -25,6 +27,8 @@ public class Commercial extends Project
     }
     Commercial other=(Commercial)obj;
     return usage==other.usage;
-
+  }
+  public String getProjectType(){
+    return "Commercial";
   }
 }

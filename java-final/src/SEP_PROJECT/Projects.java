@@ -8,8 +8,7 @@ public class Projects {
   private List<Project> projectList;
 
   public Projects() { }
-
-name = "project"
+  //name = "project"
   public List<Project> getProjectList() {
     return projectList;
   }
