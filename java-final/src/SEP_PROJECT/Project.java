@@ -85,5 +85,4 @@ public abstract class Project
   }
   public abstract String getProjectType();
 
-
 }

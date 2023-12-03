@@ -8,14 +8,13 @@ public class Road extends Project
   private int otherConstructions;
   private int length;
   private int width;
-  public Road(String name, String challenges,int budget,int timeline,int size,int floors,String usage,int otherConstructions,int length,int width){
-    super(name,1000000,5000000,timeline,size);
+  public Road(String name,int budgetRangeMin ,int budgetRangeMax,int timeline,int size,int floors,String usage,int otherConstructions,int length,int width){
+    super(name,budgetRangeMin,budgetRangeMax,timeline,size);
     this.floors=floors;
     this.usage=usage;
     this.otherConstructions=otherConstructions;
     this.length=length;
     this.width=width;
-    this.challenges=challenges;
 
   }
   public int getFloors(){
@@ -43,8 +42,7 @@ public class Road extends Project
     this.challenges = challenges;
   }
 
-  @Override public String getProjectType()
-  {
+  public String getProjectType(){
     return "Road";
   }
 }
