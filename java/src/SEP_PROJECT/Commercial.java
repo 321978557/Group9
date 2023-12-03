@@ -13,9 +13,9 @@ public class Commercial extends Project
     this.intendedUse = intendedUse;
   }
 
-  public Commercial(int size, String intendedUse)
+  public Commercial(String name,int size, String intendedUse, int timeLine)
   {
-    super(name, 2000000, 18, size);
+    super(name, 500000, 2000000,timeLine,size);
     this.intendedUse = intendedUse;
   }
 
