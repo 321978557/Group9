@@ -8,8 +8,8 @@ public class Road extends Project
   private int otherConstructions;
   private int length;
   private int width;
-  public Road(String name,int budget,int timeline,int size,int floors,String usage,int otherConstructions,int length,int width){
-    super(name,budget,timeline,size);
+  public Road(String name,int budgetRangeMin ,int budgetRangeMax,int timeline,int size,int floors,String usage,int otherConstructions,int length,int width){
+    super(name,budgetRangeMin,budgetRangeMax,timeline,size);
     this.floors=floors;
     this.usage=usage;
     this.otherConstructions=otherConstructions;
@@ -40,5 +40,9 @@ public class Road extends Project
   public void setDefault(int timeRange,int otherConstructions,String challenges){//diagrame中这里是int
     this.otherConstructions = otherConstructions;
     this.challenges = challenges;
+  }
+
+  public String getProjectType(){
+    return "Road";
   }
 }
