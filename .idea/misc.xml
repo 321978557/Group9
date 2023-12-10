@@ -2,9 +2,15 @@
 <project version="4">
 <<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
+<<<<<<< Updated upstream
 =======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
 >>>>>>> ee64c6c3652366f28870b039be7efc1f8cefdf7a
+=======
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
+>>>>>>> Stashed changes
