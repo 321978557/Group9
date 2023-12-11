@@ -61,6 +61,7 @@
     </select>
 
     <button type="button" onclick="submitForm()">Create Project</button>
+
 </form>
 
 <script>
@@ -76,6 +77,9 @@
 
         // You can send these values to the backend for further processing
         console.log("Submitted values:", budget, timeline, buildingSize, numKitchens, numBathrooms, numOtherRooms, projectType);
+        // Add your logic for form submission, for example, send the data to a server using AJAX
+        // Here, I'm just alerting a success message
+        alert("Project created successfully!");
     }
 </script>
 
