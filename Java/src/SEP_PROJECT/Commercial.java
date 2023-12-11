@@ -20,6 +20,7 @@ public class Commercial extends Project
   public String getUsage(){
 
     return usage;
+    
 
   }
   public boolean equals(Object obj){
