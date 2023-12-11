@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 20px;
+      padding: 4%;
+      border: 1px solid #000000;
+      background-color: rgb(186, 227, 227);
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Project List</h1>
+
+  <ul id="projectList"></ul>
+
+  <script>
+    const projectAttributes = {
+      Residential: ['Budget Range', 'Timeline', 'Size', 'Number of Kitchens', 'Number of Bathrooms', 'Ductwork', 'Note', 'Status'],
+      Commercial: ['Budget Range', 'Timeline', 'Size', 'Number of Floors', 'Intended Use', 'Note', 'Status'],
+      Industry: ['Budget Range', 'Timeline', 'Size', 'Intended Use', 'Note', 'Status'],
+      Road: ['Budget Range', 'Timeline', 'Length', 'Width', 'Number of Bridges', 'Number of Tunnels', 'Note', 'Status']
+    };
+
+    $(document).ready(function() {
+      $.ajax({
+        url: 'projects.txt', 
+        dataType: 'text', 
+        success: function(data) {
+          const projectList = $('#projectList');
+
+          const projects = data.split('\n').map(line => {
+            const [projectType, ...attributes] = line.split(',');
+            return { projectType, attributes };
+          });
+
+          projects.forEach(function(project) {
+            const listItem = $('<li></li>');
+            let additionalInfo = '';
+
+            const attributes = projectAttributes[project.projectType];
+
+            if (attributes && attributes.length > 0) {
+              additionalInfo += attributes.map((attr, index) => `<p><strong>${attr}:</strong> ${project.attributes[index]}</p>`).join('');
+            }
+
+            listItem.html(`
+              <h3>${project.projectType}</h3>
+              ${additionalInfo}
+            `);
+            projectList.append(listItem);
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Error fetching data:', error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
