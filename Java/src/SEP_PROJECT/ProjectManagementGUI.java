@@ -49,7 +49,7 @@ public class ProjectManagementGUI extends Application {
     // Add more labels, buttons, and input fields for project details
     Label projectTypeLabel = new Label("Project Type:");
     ComboBox<String> projectTypeComboBox = new ComboBox<>();
-    projectTypeComboBox.getItems().addAll("Residential", "Commercial", "Road");
+    projectTypeComboBox.getItems().addAll("Residential", "Commercial", "Industry","Road");
     projectTypeComboBox.setValue("Residential"); // Default value
 
     Label customValuesLabel = new Label("Custom Values:");
