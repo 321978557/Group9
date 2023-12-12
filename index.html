@@ -36,7 +36,7 @@
 
     $(document).ready(function() {
       $.ajax({
-        url: 'project_detail.txt', 
+        url: 'project_details.txt', 
         dataType: 'text', 
         success: function(data) {
           const projectList = $('#projectList');
@@ -47,7 +47,7 @@
           });
 
           projects.forEach(function(project) {
-            
+            const listItem = $('<li></li>');
             let additionalInfo = '';
 
             const attributes = projectAttributes[project.projectType];
