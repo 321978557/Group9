@@ -6,12 +6,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectManagementGUI extends Application {
 
   private TextArea savedDetailsTextArea;
+  private List<String> savedDetailsList;
+  private int currentIndex = -1;
 
   public static void main(String[] args) {
     launch(args);
@@ -34,6 +37,9 @@ public class ProjectManagementGUI extends Application {
     savedDetailsTextArea.setWrapText(true);
     borderPane.setBottom(savedDetailsTextArea);
 
+    // Initialize saved details list
+    savedDetailsList = new ArrayList<>();
+
     Scene scene = new Scene(borderPane, 500, 600); // Increased height to accommodate TextArea
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -49,7 +55,7 @@ public class ProjectManagementGUI extends Application {
     // Add more labels, buttons, and input fields for project details
     Label projectTypeLabel = new Label("Project Type:");
     ComboBox<String> projectTypeComboBox = new ComboBox<>();
-    projectTypeComboBox.getItems().addAll("Residential", "Commercial", "Industry","Road");
+    projectTypeComboBox.getItems().addAll("Residential", "Commercial", "Road");
     projectTypeComboBox.setValue("Residential"); // Default value
 
     Label customValuesLabel = new Label("Custom Values:");
@@ -72,6 +78,10 @@ public class ProjectManagementGUI extends Application {
     statusComboBox.getItems().addAll("Not Started", "In Progress", "Completed");
     statusComboBox.setValue("Not Started"); // Default value
 
+    // Building Size field for all project types
+    Label buildingSizeLabel = new Label("Building Size:");
+    TextField buildingSizeField = new TextField();
+
     // Additional fields for Residential
     Label bathroomLabel = new Label("Bathroom Number:");
     TextField bathroomField = new TextField();
@@ -79,19 +89,26 @@ public class ProjectManagementGUI extends Application {
     Label kitchenLabel = new Label("Kitchen Number:");
     TextField kitchenField = new TextField();
 
-    Label buildingSizeLabelResidential = new Label("Building Size:");
-    TextField buildingSizeFieldResidential = new TextField();
-
     // Additional fields for Commercial
-    Label buildingSizeLabelCommercial = new Label("Building Size:");
-    TextField buildingSizeFieldCommercial = new TextField();
+    // Label buildingSizeLabelCommercial = new Label("Building Size:");
+    // TextField buildingSizeFieldCommercial = new TextField();
 
     Label floorNumberLabel = new Label("Floor Number:");
     TextField floorNumberField = new TextField();
 
+    // Budget field for all project types
+    Label budgetLabel = new Label("Budget:");
+    TextField budgetField = new TextField();
+
+    // Notes field for all project types
+    Label notesLabel = new Label("Notes:");
+    TextArea notesArea = new TextArea();
+
     Label actionsLabel = new Label("Actions:");
     Button updateButton = new Button("Update");
     Button saveButton = new Button("Save");
+    Button prevButton = new Button("Previous");
+    Button nextButton = new Button("Next");
 
     // Add event handlers for buttons
     updateButton.setOnAction(e -> handleUpdate(
@@ -104,9 +121,10 @@ public class ProjectManagementGUI extends Application {
         statusComboBox.getValue(),
         bathroomField.getText(),
         kitchenField.getText(),
-        buildingSizeFieldResidential.getText(),
-        buildingSizeFieldCommercial.getText(),
-        floorNumberField.getText()
+        floorNumberField.getText(),
+        budgetField.getText(),
+        notesArea.getText(),
+        buildingSizeField.getText()
     ));
 
     saveButton.setOnAction(e -> handleSave(
@@ -119,10 +137,14 @@ public class ProjectManagementGUI extends Application {
         statusComboBox.getValue(),
         bathroomField.getText(),
         kitchenField.getText(),
-        buildingSizeFieldResidential.getText(),
-        buildingSizeFieldCommercial.getText(),
-        floorNumberField.getText()
+        floorNumberField.getText(),
+        budgetField.getText(),
+        notesArea.getText(),
+        buildingSizeField.getText()
     ));
+
+    prevButton.setOnAction(e -> showPreviousDetails());
+    nextButton.setOnAction(e -> showNextDetails());
 
     // Add elements to the VBox
     projectDetailsBox.getChildren().addAll(
@@ -134,14 +156,19 @@ public class ProjectManagementGUI extends Application {
         widthLabel, widthField,
         timelineLabel, timelineSpinner,
         statusLabel, statusComboBox,
+        // Building Size field for all project types
+        buildingSizeLabel, buildingSizeField,
         // Additional fields for Residential
         bathroomLabel, bathroomField,
         kitchenLabel, kitchenField,
-        buildingSizeLabelResidential, buildingSizeFieldResidential,
         // Additional fields for Commercial
-        buildingSizeLabelCommercial, buildingSizeFieldCommercial,
+        // buildingSizeLabelCommercial, buildingSizeFieldCommercial,
         floorNumberLabel, floorNumberField,
-        actionsLabel, updateButton, saveButton
+        // Budget field for all project types
+        budgetLabel, budgetField,
+        // Notes field for all project types
+        notesLabel, notesArea,
+        actionsLabel, updateButton, saveButton, prevButton, nextButton
     );
 
     // Update the UI when the project type changes
@@ -149,8 +176,7 @@ public class ProjectManagementGUI extends Application {
         projectTypeComboBox.getValue(),
         bathroomLabel, bathroomField,
         kitchenLabel, kitchenField,
-        buildingSizeLabelResidential, buildingSizeFieldResidential,
-        buildingSizeLabelCommercial, buildingSizeFieldCommercial,
+        // buildingSizeLabelCommercial, buildingSizeFieldCommercial,
         floorNumberLabel, floorNumberField
     ));
 
@@ -159,62 +185,57 @@ public class ProjectManagementGUI extends Application {
 
   private void handleUpdate(String projectType, String customValues, String defaultValues,
       String length, String width, int timeline, String status,
-      String bathroom, String kitchen, String buildingSizeResidential, String buildingSizeCommercial,
-      String floorNumber) {
+      String bathroom, String kitchen, String floorNumber, String budget, String notes, String buildingSize) {
     // Add your update logic here
     String updateDetails = "Update - Project Type: " + projectType + ", Custom Values: " +
         customValues + ", Default Values: " + defaultValues + ", Length: " +
         length + ", Width: " + width + ", Timeline: " +
-        timeline + ", Status: " + status;
-
-    if ("Residential".equals(projectType)) {
-      updateDetails += ", Bathroom Number: " + bathroom + ", Kitchen Number: " + kitchen +
-          ", Building Size: " + buildingSizeResidential;
-    } else if ("Commercial".equals(projectType)) {
-      updateDetails += ", Building Size: " + buildingSizeCommercial + ", Floor Number: " + floorNumber;
-    } else if ("Road".equals(projectType)) {
-      // Add road-specific fields if needed
-    }
-
-    updateDetails += "\n";
+        timeline + ", Status: " + status +
+        ", Bathroom Number: " + bathroom + ", Kitchen Number: " + kitchen +
+        ", Floor Number: " + floorNumber +
+        ", Budget: " + budget +
+        ", Notes: " + notes +
+        ", Building Size: " + buildingSize + "\n";
 
     // Append to the existing details
-    savedDetailsTextArea.appendText(updateDetails);
+    savedDetailsList.add(updateDetails);
+    currentIndex = savedDetailsList.size() - 1;
+    showDetailsAtIndex(currentIndex);
   }
 
   private void handleSave(String projectType, String customValues, String defaultValues,
       String length, String width, int timeline, String status,
-      String bathroom, String kitchen, String buildingSizeResidential, String buildingSizeCommercial,
-      String floorNumber) {
+      String bathroom, String kitchen, String floorNumber, String budget, String notes, String buildingSize) {
     // Add your save logic here
     String saveDetails = "Save - Project Type: " + projectType + ", Custom Values: " +
         customValues + ", Default Values: " + defaultValues + ", Length: " +
         length + ", Width: " + width + ", Timeline: " +
-        timeline + ", Status: " + status;
-
-    if ("Residential".equals(projectType)) {
-      saveDetails += ", Bathroom Number: " + bathroom + ", Kitchen Number: " + kitchen +
-          ", Building Size: " + buildingSizeResidential;
-    } else if ("Commercial".equals(projectType)) {
-      saveDetails += ", Building Size: " + buildingSizeCommercial + ", Floor Number: " + floorNumber;
-    } else if ("Road".equals(projectType)) {
-      // Add road-specific fields if needed
-    }
-
-    saveDetails += "\n";
+        timeline + ", Status: " + status +
+        ", Bathroom Number: " + bathroom + ", Kitchen Number: " + kitchen +
+        ", Floor Number: " + floorNumber +
+        ", Budget: " + budget +
+        ", Notes: " + notes +
+        ", Building Size: " + buildingSize + "\n";
 
     // Append to the existing details
-    savedDetailsTextArea.appendText(saveDetails);
+    savedDetailsList.add(saveDetails);
+    currentIndex = savedDetailsList.size() - 1;
+    showDetailsAtIndex(currentIndex);
 
-    // Save to a file named "project_detail.txt"
-    saveToFile(saveDetails, "project_detail.txt");
+    // Save to a file named "project_detail.csv"
+    saveToCSVFile(savedDetailsList, "project_detail.csv");
   }
 
-  private void saveToFile(String details, String filePath) {
-    try (FileWriter writer = new FileWriter(filePath, true)) {
-      // Write the details to the file
-      writer.write(details);
-      writer.write("\n"); // Add a newline for better readability
+  private void saveToCSVFile(List<String> detailsList, String filePath) {
+    try (PrintWriter writer = new PrintWriter(new File(filePath))) {
+      // Write CSV header
+      writer.println("Type,Custom,Default,Length,Width,Timeline,Status,Bathroom,Kitchen,Floor,Budget,Notes,Building Size");
+
+      // Write details to CSV
+      for (String details : detailsList) {
+        writer.println(details.replaceAll("[-]", ""));
+      }
+
       System.out.println("Project details saved to: " + filePath);
     } catch (IOException e) {
       e.printStackTrace();
@@ -224,8 +245,7 @@ public class ProjectManagementGUI extends Application {
   private void updateUIForProjectType(String projectType,
       Label bathroomLabel, TextField bathroomField,
       Label kitchenLabel, TextField kitchenField,
-      Label buildingSizeLabelResidential, TextField buildingSizeFieldResidential,
-      Label buildingSizeLabelCommercial, TextField buildingSizeFieldCommercial,
+      // Label buildingSizeLabelCommercial, TextField buildingSizeFieldCommercial,
       Label floorNumberLabel, TextField floorNumberField) {
     // Update UI based on project type
     if ("Residential".equals(projectType)) {
@@ -233,11 +253,8 @@ public class ProjectManagementGUI extends Application {
       bathroomField.setDisable(false);
       kitchenLabel.setDisable(false);
       kitchenField.setDisable(false);
-      buildingSizeLabelResidential.setDisable(false);
-      buildingSizeFieldResidential.setDisable(false);
-
-      buildingSizeLabelCommercial.setDisable(true);
-      buildingSizeFieldCommercial.setDisable(true);
+      // buildingSizeLabelCommercial.setDisable(true);
+      // buildingSizeFieldCommercial.setDisable(true);
       floorNumberLabel.setDisable(true);
       floorNumberField.setDisable(true);
     } else if ("Commercial".equals(projectType)) {
@@ -245,11 +262,8 @@ public class ProjectManagementGUI extends Application {
       bathroomField.setDisable(true);
       kitchenLabel.setDisable(true);
       kitchenField.setDisable(true);
-      buildingSizeLabelResidential.setDisable(true);
-      buildingSizeFieldResidential.setDisable(true);
-
-      buildingSizeLabelCommercial.setDisable(false);
-      buildingSizeFieldCommercial.setDisable(false);
+      // buildingSizeLabelCommercial.setDisable(false);
+      // buildingSizeFieldCommercial.setDisable(false);
       floorNumberLabel.setDisable(false);
       floorNumberField.setDisable(false);
     } else if ("Road".equals(projectType)) {
@@ -257,13 +271,30 @@ public class ProjectManagementGUI extends Application {
       bathroomField.setDisable(true);
       kitchenLabel.setDisable(true);
       kitchenField.setDisable(true);
-      buildingSizeLabelResidential.setDisable(true);
-      buildingSizeFieldResidential.setDisable(true);
-
-      buildingSizeLabelCommercial.setDisable(true);
-      buildingSizeFieldCommercial.setDisable(true);
+      // buildingSizeLabelCommercial.setDisable(true);
+      // buildingSizeFieldCommercial.setDisable(true);
       floorNumberLabel.setDisable(true);
       floorNumberField.setDisable(true);
+    }
+  }
+
+  private void showDetailsAtIndex(int index) {
+    if (index >= 0 && index < savedDetailsList.size()) {
+      savedDetailsTextArea.setText(savedDetailsList.get(index));
+    }
+  }
+
+  private void showPreviousDetails() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      showDetailsAtIndex(currentIndex);
+    }
+  }
+
+  private void showNextDetails() {
+    if (currentIndex < savedDetailsList.size() - 1) {
+      currentIndex++;
+      showDetailsAtIndex(currentIndex);
     }
   }
 }
